@@ -1,21 +1,47 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const NAV_ITEMS = ["Home", "About", "Experiences", "Projects", "Contact"];
+const NAV_ITEMS = [
+  "Home",
+  "About",
+  "Experiences",
+  "Projects",
+  "Contact",
+];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id.toLowerCase());
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id.toLowerCase());
+
+    if (section) {
+      const navbarHeight = 72;
+
+      const y =
+        section.getBoundingClientRect().top +
+        window.pageYOffset -
+        navbarHeight;
+
+      window.scrollTo({
+        top: y,
+        behavior: "smooth",
+      });
+    }
+
     setMobileOpen(false);
   };
 
@@ -30,73 +56,82 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Brand */}
-          <motion.span
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-base sm:text-lg font-bold text-gray-900 truncate max-w-[160px] sm:max-w-none cursor-default"
+            className="text-base sm:text-lg font-bold text-gray-900 truncate max-w-[180px] sm:max-w-none cursor-default"
           >
             Yunita Sulistiyowati
-          </motion.span>
+          </motion.div>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-1 lg:gap-2">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-1">
             {NAV_ITEMS.map((item, i) => (
               <motion.button
                 key={item}
-                onClick={() => scrollTo(item)}
-                initial={{ opacity: 0, y: -8 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
-                className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all duration-150 cursor-pointer"
+                onClick={() => scrollToSection(item)}
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200 cursor-pointer"
               >
                 {item}
               </motion.button>
             ))}
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile Hamburger */}
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            onClick={() => setMobileOpen((v) => !v)}
+            type="button"
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((prev) => !prev)}
+            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
           >
-            <div className="w-5 h-4 flex flex-col justify-between">
-              {[
-                mobileOpen ? "rotate-45 translate-y-[7px]" : "",
-                mobileOpen ? "opacity-0" : "",
-                mobileOpen ? "-rotate-45 -translate-y-[7px]" : "",
-              ].map((cls, i) => (
-                <span
-                  key={i}
-                  className={`block w-full h-0.5 bg-gray-900 transition-all duration-200 ${cls}`}
-                />
-              ))}
+            <div className="relative w-5 h-5">
+              <span
+                className={`absolute left-0 top-1 block h-0.5 w-5 bg-gray-900 transition-all duration-300 ${
+                  mobileOpen ? "rotate-45 top-2.5" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-2.5 block h-0.5 w-5 bg-gray-900 transition-all duration-300 ${
+                  mobileOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-4 block h-0.5 w-5 bg-gray-900 transition-all duration-300 ${
+                  mobileOpen ? "-rotate-45 top-2.5" : ""
+                }`}
+              />
             </div>
           </button>
         </div>
       </div>
 
-      {/* Mobile dropdown */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
+            className="lg:hidden border-t border-gray-100 bg-white/95 backdrop-blur-md"
           >
-            <div className="px-4 py-3 flex flex-col gap-1">
-              {NAV_ITEMS.map((item) => (
-                <button
+            <div className="px-4 py-4 flex flex-col gap-1">
+              {NAV_ITEMS.map((item, i) => (
+                <motion.button
                   key={item}
-                  onClick={() => scrollTo(item)}
-                  className="w-full text-left px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  onClick={() => scrollToSection(item)}
+                  className="w-full text-left px-4 py-3 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-all duration-200"
                 >
                   {item}
-                </button>
+                </motion.button>
               ))}
             </div>
           </motion.div>

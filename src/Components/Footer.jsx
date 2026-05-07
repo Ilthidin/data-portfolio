@@ -35,7 +35,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-4 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 lg:gap-120 items-start py-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 md:gap-32 lg:gap-120 items-start py-2">
           {/* Brand */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -44,7 +44,7 @@ export default function Footer() {
             transition={{ duration: 0.6 }}
             className="text-center md:text-left"
           >
-            <h2 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-justify">
+            <h2 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-center md:text-justify">
               Thanks for Scrolling This Far
             </h2>
             <p className="text-sm sm:text-base text-gray-400 leading-relaxed max-w-sm mx-auto md:mx-0 text-justify">
@@ -89,7 +89,7 @@ export default function Footer() {
               {FOCUS_AREAS.map((area) => (
                 <li
                   key={area}
-                  className="text-sm sm:text-base text-gray-400 flex items-center gap-2 justify-center md:justify-start hover:text-gray-100"
+                  className="text-sm sm:text-base text-gray-400 flex items-center gap-2 md:justify-start hover:text-gray-100"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-500 shrink-0" />
                   {area}
@@ -105,7 +105,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-8 sm:mt-10 border-t border-gray-700 pt-5 text-center text-xs sm:text-sm text-gray-500"
+          className="mt-2 border-t border-gray-700 pt-5 text-center text-xs sm:text-sm text-gray-500"
         >
           © {year} Yunita Sulistiyowati. All rights reserved.
         </motion.div>

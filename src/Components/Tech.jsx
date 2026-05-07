@@ -11,6 +11,7 @@ import powerbi from "../assets/powerbi.webp";
 import python from "../assets/python.webp";
 import r from "../assets/r.webp";
 import sheets from "../assets/sheets.webp";
+import trends from "../assets/trends.webp";
 import tableau from "../assets/tableau.webp";
 
 const TECH_STACK = [
@@ -24,6 +25,7 @@ const TECH_STACK = [
   { name: "Python", src: python },
   { name: "R", src: r },
   { name: "Sheets", src: sheets },
+  { name: "Trends", src: trends },
   { name: "Tableau", src: tableau },
 ];
 
@@ -111,7 +113,7 @@ export default function Tech() {
 
     return {
       firstRow: shuffled.slice(0, 5),
-      secondRow: shuffled.slice(5, 11),
+      secondRow: shuffled.slice(6, 11),
     };
   }, []);
 
