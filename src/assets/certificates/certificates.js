@@ -60,7 +60,7 @@ export const certificates = [
     image: img6,
     category: "volunteer",
     title: "Volunteer Contribution in Acts of Kindness Campaign",
-    desc: "Helped organize local tech events.",
+    desc: "",
   },
   {
     image: img7,
@@ -72,19 +72,19 @@ export const certificates = [
     image: img8,
     category: "volunteer",
     title: "Volunteer Contribution in Building Resilience Campaign",
-    desc: "Mentored beginners in coding.",
+    desc: "",
   },
   {
     image: img9,
     category: "volunteer",
     title: "Staff Volunteer at Education College Indonesia",
-    desc: "Assisted in workshop logistics.",
+    desc: "",
   },
   {
     image: img10,
     category: "volunteer",
     title: "Volunteering in Digital Gender Awareness Campaign",
-    desc: "Worked with cross-functional teams.",
+    desc: "",
   },
   { image: img11, category: "intern", title: "SEO Content Writing", desc: "Utilized SEO insights and audience behavior analysis to optimize written content and improve engagement performance." },
   {

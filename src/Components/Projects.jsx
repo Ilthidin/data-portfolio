@@ -46,7 +46,7 @@ function ExperienceCard({ item, onClick }) {
             onClick={() => onClick(item)}
             className="inline-block text-xs sm:text-sm text-white bg-gray-900 py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors mt-auto self-start"
           >
-            View More
+            View
           </button>
         </div>
       </div>
