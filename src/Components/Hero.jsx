@@ -19,7 +19,7 @@ function DataViz() {
   }, []);
 
   return (
-    <div className="relative w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="relative w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[5/3] 2xl:aspect-[5/4] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Grid lines */}
       <svg className="absolute inset-0 w-full h-full opacity-10" aria-hidden>
         {Array.from({ length: 8 }).map((_, i) => (
@@ -176,15 +176,17 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="flex justify-center mt-10 sm:mt-14 lg:mt-16"
+          className="flex justify-center pt-12"
         >
-          <button
+          <motion.button
             onClick={() => scrollTo("about")}
             aria-label="Scroll to about"
-            className="rounded-full border-2 border-gray-700 hover:border-gray-600 transition-colors hover:cursor-pointer animate-bounce"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-full border-2 border-gray-800 hover:border-gray-500 cursor-pointer animate-bounce"
           >
-            <ChevronDown className="w-8 h-8 sm:w-12 sm:h-12 text-gray-800" />
-          </button>
+            <ChevronDown className="w-10 h-10 lg:w-12 lg:h-12 text-gray-800 hover:text-gray-500" />
+          </motion.button>
         </motion.div>
       </div>
     </section>

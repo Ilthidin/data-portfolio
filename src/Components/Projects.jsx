@@ -9,7 +9,7 @@ const TABS = [
   { key: "volunteer", label: "Volunteer" },
 ];
 
-function ExperienceCard({ item }) {
+function ExperienceCard({ item, onClick }) {
   return (
     <motion.div
       layout
@@ -17,7 +17,7 @@ function ExperienceCard({ item }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 32 }}
       transition={{ duration: 0.35 }}
-      className="w-full sm:w-1/2 xl:w-1/4 px-3 mb-6"
+      className="w-full"
     >
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden h-full flex flex-col">
         <div className="aspect-video w-full overflow-hidden bg-gray-100">
@@ -27,23 +27,24 @@ function ExperienceCard({ item }) {
             className="w-full h-full object-cover"
           />
         </div>
+
         <div className="p-4 sm:p-5 flex flex-col flex-1">
           <h3 className="font-semibold text-sm sm:text-base text-gray-900 mb-2 line-clamp-2">
             {item.title}
           </h3>
+
           {item.desc && (
             <p className="text-xs sm:text-sm text-gray-600 mb-4 flex-1 line-clamp-3">
               {item.desc}
             </p>
           )}
-          <a
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
+
+          <button
+            onClick={() => onClick(item)}
             className="inline-block text-xs sm:text-sm text-white bg-gray-900 py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors mt-auto self-start"
           >
             View More
-          </a>
+          </button>
         </div>
       </div>
     </motion.div>
@@ -52,6 +53,7 @@ function ExperienceCard({ item }) {
 
 export default function Projects() {
   const [activeTab, setActiveTab] = useState("all");
+  const [selected, setSelected] = useState(null);
 
   const filtered =
     activeTab === "all"
@@ -59,7 +61,7 @@ export default function Projects() {
       : certificates.filter((item) => item.category === activeTab);
 
   return (
-    <section id="blog" className="py-14 sm:py-18 md:py-24 bg-gray-50">
+    <section id="projects" className="py-14 sm:py-18 md:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-8 sm:mb-10">
@@ -91,15 +93,45 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Cards */}
-        <motion.div layout className="flex flex-wrap -mx-3">
+        {/* Grid */}
+        <motion.div
+          layout
+          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4"
+        >
           <AnimatePresence mode="popLayout">
             {filtered.map((item, i) => (
-              <ExperienceCard key={item.title + i} item={item} />
+              <ExperienceCard
+                key={item.title + i}
+                item={item}
+                onClick={setSelected}
+              />
             ))}
           </AnimatePresence>
         </motion.div>
       </div>
+
+      {/* Fullscreen Modal */}
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelected(null)}
+          >
+            <motion.img
+              src={selected.image}
+              alt={selected.title}
+              className="max-w-full max-h-full rounded-lg shadow-lg"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

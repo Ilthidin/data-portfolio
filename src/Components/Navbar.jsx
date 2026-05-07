@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const NAV_ITEMS = ["Home", "About", "Skills", "Projects", "Contact"];
+const NAV_ITEMS = ["Home", "About", "Experiences", "Projects", "Contact"];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -34,13 +34,13 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-base sm:text-lg font-bold text-gray-900 truncate max-w-[160px] sm:max-w-none"
+            className="text-base sm:text-lg font-bold text-gray-900 truncate max-w-[160px] sm:max-w-none cursor-default"
           >
             Yunita Sulistiyowati
           </motion.span>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1 lg:gap-2">
+          <div className="hidden lg:flex items-center gap-1 lg:gap-2">
             {NAV_ITEMS.map((item, i) => (
               <motion.button
                 key={item}
@@ -48,7 +48,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
-                className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all duration-150"
+                className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-all duration-150 cursor-pointer"
               >
                 {item}
               </motion.button>
@@ -57,7 +57,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
@@ -86,7 +86,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden overflow-hidden bg-white border-t border-gray-100"
+            className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
           >
             <div className="px-4 py-3 flex flex-col gap-1">
               {NAV_ITEMS.map((item) => (

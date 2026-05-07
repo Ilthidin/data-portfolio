@@ -5,7 +5,7 @@ import Projects from "./Components/Projects";
 import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import BackToTop from "./utils/BackToTop";
-import Skills from "./Components/Skills";
+import Experiences from "./Components/Experiences";
 import Tech from "./Components/Tech";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <Hero />
       <About />
       <Tech />
-      <Skills />
+      <Experiences />
       <Projects />
       <Contact />
       <Footer />

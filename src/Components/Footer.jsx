@@ -35,7 +35,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-4 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 lg:gap-100 items-start py-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 lg:gap-120 items-start py-2">
           {/* Brand */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -47,7 +47,7 @@ export default function Footer() {
             <h2 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-justify">
               Thanks for Scrolling This Far
             </h2>
-            <p className="text-sm sm:text-base text-gray-400 leading-relaxed max-w-sm mx-auto md:mx-0">
+            <p className="text-sm sm:text-base text-gray-400 leading-relaxed max-w-sm mx-auto md:mx-0 text-justify">
               This website is a reflection of my journey as a data enthusiast,
               shaped by real-world projects, learning experiences, and the drive
               to turn numbers into narratives.
@@ -85,7 +85,7 @@ export default function Footer() {
             <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4">
               Key Focus Areas
             </h3>
-            <ul className="space-y-1.5 sm:space-y-2 ">
+            <ul className="space-y-1.5 sm:space-y-2 cursor-default">
               {FOCUS_AREAS.map((area) => (
                 <li
                   key={area}

@@ -116,15 +116,15 @@ export default function Tech() {
   }, []);
 
   return (
-    <section className="bg-gray-50 py-14 sm:py-18 md:py-22 overflow-hidden">
+    <section className="bg-gray-50 pb-16 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
         viewport={{ once: true, margin: "-80px" }}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-10 px-4">
-          Technology Stack
+        <h2 className="text-2xl sm:text-4xl font-bold text-center mb-8 sm:mb-16 px-4">
+          Data Analyst Tech Stack
         </h2>
 
         <MarqueeRow items={firstRow} direction="left" speed={70} />
