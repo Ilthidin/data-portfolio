@@ -10,22 +10,30 @@ const TABS = [
   { key: "research", label: "Research" },
 ];
 
-function ExperienceCard({ item, onClick }) {
+function ExperienceCard({ item, onClick, index }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 32 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 32 }}
-      transition={{ duration: 0.35 }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{
+        once: true,
+        amount: 0.3,
+      }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.05,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className="w-full h-full"
     >
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden h-full min-h-full flex flex-col">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden h-full flex flex-col">
         {/* Image */}
         <div className="aspect-video w-full overflow-hidden bg-gray-100">
           <img
             src={item.image}
             alt={item.title}
+            loading="lazy"
             className="w-full h-full object-cover"
           />
         </div>
@@ -34,10 +42,10 @@ function ExperienceCard({ item, onClick }) {
         <div className="p-4 sm:p-5 flex flex-col flex-1">
           <h3 className="font-semibold text-sm sm:text-base text-gray-900 mb-2 line-clamp-2">
             {item.title}
-          </h3> 
+          </h3>
 
           {item.desc && (
-            <p className="text-xs sm:text-sm text-gray-600 mb-4 flex-1 overflow-hidden text-ellipsis line-clamp-3">
+            <p className="text-xs sm:text-sm text-gray-600 mb-4 flex-1 line-clamp-3">
               {item.desc}
             </p>
           )}
@@ -63,10 +71,32 @@ export default function Projects() {
   );
 
   return (
-    <section id="projects" className="py-14 sm:py-18 md:py-24 bg-gray-50">
+    <motion.section
+      id="projects"
+      className="py-14 sm:py-18 md:py-24 bg-gray-50"
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{
+        once: true,
+        amount: 0.15,
+      }}
+      transition={{
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-8 sm:mb-10">
+        <motion.div
+          className="text-center mb-8 sm:mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.6,
+            delay: 0.1,
+          }}
+        >
           <p className="text-sm sm:text-base font-semibold text-gray-500 mb-1 sm:mb-2 uppercase tracking-wide">
             Internships & Involvement
           </p>
@@ -78,40 +108,51 @@ export default function Projects() {
           <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto">
             Practical experience that connects theory with real-world impact.
           </p>
-        </div>
+        </motion.div>
 
         {/* Tabs */}
-        <div className="flex justify-center flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10">
+        <motion.div
+          className="flex justify-center flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.5,
+            delay: 0.2,
+          }}
+        >
           {TABS.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${activeTab === tab.key
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
+                activeTab === tab.key
                   ? "bg-gray-900 text-white shadow-sm"
                   : "bg-white text-gray-600 border border-gray-200 hover:border-gray-400"
-                }`}
+              }`}
             >
               {tab.label}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Grid */}
-        <motion.div
-          layout
-          className= "flex flex-wrap items-stretch -m-2 justify-center"
-        >
+        <div className="flex flex-wrap items-stretch -m-2 justify-center">
           <AnimatePresence mode="popLayout">
             {filtered.map((item, i) => (
               <div
                 key={item.title + i}
                 className="w-1/2 md:w-1/3 lg:w-1/4 p-2 flex"
               >
-                <ExperienceCard item={item} onClick={setSelected} />
+                <ExperienceCard
+                  item={item}
+                  index={i}
+                  onClick={setSelected}
+                />
               </div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
         {/* Fullscreen Modal */}
         <AnimatePresence>
@@ -136,6 +177,6 @@ export default function Projects() {
           )}
         </AnimatePresence>
       </div>
-    </section>
+    </motion.section>
   );
 }
