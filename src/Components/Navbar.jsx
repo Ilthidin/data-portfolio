@@ -47,11 +47,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100"
           : "bg-white/80 backdrop-blur-sm"
-      }`}
+        }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
@@ -89,21 +88,18 @@ export default function Navbar() {
             onClick={() => setMobileOpen((prev) => !prev)}
             className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
           >
-            <div className="relative w-5 h-5">
+            <div className="flex flex-col justify-center gap-1 w-5 h-5">
               <span
-                className={`absolute left-0 top-1 block h-0.5 w-5 bg-gray-900 transition-all duration-300 ${
-                  mobileOpen ? "rotate-45 top-2.5" : ""
-                }`}
+                className={`block h-0.5 w-5 bg-gray-900 transition-all duration-300 ${mobileOpen ? "translate-y-1.5 rotate-45" : ""
+                  }`}
               />
               <span
-                className={`absolute left-0 top-2.5 block h-0.5 w-5 bg-gray-900 transition-all duration-300 ${
-                  mobileOpen ? "opacity-0" : ""
-                }`}
+                className={`block h-0.5 w-5 bg-gray-900 transition-all duration-300 ${mobileOpen ? "opacity-0" : ""
+                  }`}
               />
               <span
-                className={`absolute left-0 top-4 block h-0.5 w-5 bg-gray-900 transition-all duration-300 ${
-                  mobileOpen ? "-rotate-45 top-2.5" : ""
-                }`}
+                className={`block h-0.5 w-5 bg-gray-900 transition-all duration-300 ${mobileOpen ? "-translate-y-1.5 -rotate-45" : ""
+                  }`}
               />
             </div>
           </button>
